@@ -11,6 +11,7 @@ const yearButton = document.getElementById('sort-year');
 const producerButton = document.getElementById('sort-producer');
 const clearButton = document.getElementById('clear');
 const tableDiv = document.querySelector('.table');
+const selectSort = document.getElementById('selected-sort');
 
 priceButton.addEventListener("click", priceFunc);
 yearButton.addEventListener("click", yearFunc);
@@ -49,11 +50,9 @@ function priceFunc() {
         if(a.price > b.price) return 1;
         if(a.price < b.price) return -1;
         if(a.price === b.price) return 0;
-        console.log(itemList);
         return itemList;
     });
 
-    console.log(itemList);
     clearFunc();
     let countItem = itemList.length;
     for(i = 0; i < countItem; i++) {
@@ -64,18 +63,16 @@ function priceFunc() {
 };
 
 function nameFunc() {
-
     itemList.sort((a, b) => {
-        
         if(a.name > b.name) return 1;
         if(a.name < b.name) return -1;
         if(a.name === b.name) return 0;
-        console.log(itemList);
         return itemList;
     });
-
-    console.log(itemList);
+  
+   
     clearFunc();
+
     let countItem = itemList.length;
     for(i = 0; i < countItem; i++) {
         let row = document.createElement('tr');
@@ -91,11 +88,9 @@ function prodFunc() {
         if(a.producer > b.producer) return 1;
         if(a.producer < b.producer) return -1;
         if(a.producer === b.producer) return 0;
-        console.log(itemList);
         return itemList;
     });
 
-    console.log(itemList);
     clearFunc();
     let countItem = itemList.length;
     for(i = 0; i < countItem; i++) {
@@ -104,5 +99,19 @@ function prodFunc() {
         tableDiv.appendChild(row);
     }
 };
+
+
+selectSort.addEventListener('change', (ev) => {
+    let valsort = ev.target.value;
+    if(valsort == 'price') {
+        priceFunc();
+    } else if(valsort == 'name') {
+        nameFunc();
+    } else if(valsort == 'year') {
+        yearFunc();
+    } else if(valsort == 'producer') {
+        prodFunc();
+    }
+});
 
 
